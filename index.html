@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BandMaster – IELTS & English Learning App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #21262d;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --heading-font: 'Playfair Display', serif;
+      --body-font: 'DM Sans', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body-font);
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,17,23,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: var(--heading-font);
+      font-size: 1.3rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(88,166,255,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(88,166,255,0.1);
+      border: 1px solid rgba(88,166,255,0.25);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: var(--heading-font);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #e6edf3, #58a6ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+      font-size: 1rem;
+    }
+
+    /* SECTIONS */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .legal-section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .legal-section:last-child { border-bottom: none; }
+
+    .section-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .legal-section h2 {
+      font-family: var(--heading-font);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .updated {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .updated::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--accent2);
+      border-radius: 50%;
+    }
+
+    .legal-section h3 {
+      font-family: var(--heading-font);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 2rem 0 0.6rem;
+    }
+
+    .legal-section p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .legal-section ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 0.8rem;
+    }
+
+    .legal-section ul li {
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 0.25rem 0 0.25rem 1.2rem;
+      position: relative;
+    }
+
+    .legal-section ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .highlight-box {
+      background: rgba(88,166,255,0.06);
+      border: 1px solid rgba(88,166,255,0.2);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      color: var(--text);
+      font-size: 0.875rem;
+    }
+
+    /* CONTACT */
+    .contact-section {
+      padding: 4rem 0;
+      text-align: center;
+    }
+
+    .contact-section p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .contact-section a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    footer span { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">BandMaster</a>
+  <ul class="nav-links">
+    <li><a href="#terms">Terms</a></li>
+    <li><a href="#privacy">Privacy</a></li>
+    <li><a href="#refund">Refund</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Legal & Policies</div>
+  <h1>BandMaster</h1>
+  <p>IELTS preparation &amp; English learning — your path to Band 7 and beyond.</p>
+</div>
+
+<!-- TERMS OF SERVICE -->
+<div class="container">
+  <section class="legal-section" id="terms">
+    <div class="section-tag">Legal</div>
+    <h2>Terms of Service</h2>
+    <div class="updated">Last updated: May 21, 2026</div>
+
+    <h3>1. Acceptance of Terms</h3>
+    <p>By downloading, installing, or using BandMaster ("the App"), you agree to be bound by these Terms of Service. If you do not agree, please do not use the App.</p>
+
+    <h3>2. Description of Service</h3>
+    <p>BandMaster provides IELTS preparation materials and English language learning tools, including practice tests, vocabulary exercises, and skill-building content. The App is available on mobile platforms and may be accessed via a subscription.</p>
+
+    <h3>3. Subscriptions & Payments</h3>
+    <p>BandMaster offers subscription plans that grant access to premium features. Subscriptions are billed on a recurring basis (monthly or annually) and are processed securely through Paddle.</p>
+    <ul>
+      <li>Subscriptions automatically renew unless cancelled before the renewal date.</li>
+      <li>You may cancel your subscription at any time from your account settings.</li>
+      <li>Prices may change with 30 days' prior notice.</li>
+    </ul>
+
+    <h3>4. User Accounts</h3>
+    <p>You are responsible for maintaining the confidentiality of your account credentials. You must be at least 13 years old to use the App. You agree not to share your account with others.</p>
+
+    <h3>5. Intellectual Property</h3>
+    <p>All content within BandMaster — including practice questions, audio files, lesson materials, and UI designs — is the property of BandMaster and protected by applicable copyright laws. You may not reproduce or distribute any content without written permission.</p>
+
+    <h3>6. Prohibited Use</h3>
+    <ul>
+      <li>Reverse engineering or attempting to extract source code.</li>
+      <li>Using the App for any unlawful purpose.</li>
+      <li>Sharing premium content outside of the App.</li>
+      <li>Attempting to bypass subscription verification.</li>
+    </ul>
+
+    <h3>7. Disclaimer of Warranties</h3>
+    <p>The App is provided "as is." We do not guarantee a specific IELTS score as a result of using BandMaster. Language learning outcomes depend on individual effort and practice.</p>
+
+    <h3>8. Limitation of Liability</h3>
+    <p>To the fullest extent permitted by law, BandMaster shall not be liable for any indirect, incidental, or consequential damages arising from your use of the App.</p>
+
+    <h3>9. Changes to Terms</h3>
+    <p>We reserve the right to modify these Terms at any time. Continued use of the App after changes constitutes acceptance of the new Terms.</p>
+
+    <h3>10. Contact</h3>
+    <p>For questions about these Terms, contact us at <a href="mailto:support@bandmaster.app" style="color: var(--accent);">support@bandmaster.app</a>.</p>
+  </section>
+
+  <!-- PRIVACY POLICY -->
+  <section class="legal-section" id="privacy">
+    <div class="section-tag">Legal</div>
+    <h2>Privacy Policy</h2>
+    <div class="updated">Last updated: May 21, 2026</div>
+
+    <div class="highlight-box">
+      <p>We respect your privacy. BandMaster collects only the data necessary to provide and improve our service. We do not sell your personal data to third parties.</p>
+    </div>
+
+    <h3>1. Information We Collect</h3>
+    <ul>
+      <li><strong style="color: var(--text);">Account data:</strong> name, email address when you register.</li>
+      <li><strong style="color: var(--text);">Usage data:</strong> lessons completed, practice scores, session duration.</li>
+      <li><strong style="color: var(--text);">Payment data:</strong> handled entirely by Paddle — we never store card details.</li>
+      <li><strong style="color: var(--text);">Device data:</strong> device type, OS version, app version for troubleshooting.</li>
+    </ul>
+
+    <h3>2. How We Use Your Data</h3>
+    <ul>
+      <li>To provide and personalize your learning experience.</li>
+      <li>To process subscription payments via Paddle.</li>
+      <li>To send important updates about the App (no spam).</li>
+      <li>To improve the App based on aggregated usage analytics.</li>
+    </ul>
+
+    <h3>3. Data Sharing</h3>
+    <p>We share data only with trusted service providers necessary to operate the App:</p>
+    <ul>
+      <li><strong style="color: var(--text);">Paddle</strong> — payment processing.</li>
+      <li><strong style="color: var(--text);">Analytics providers</strong> — anonymized usage statistics only.</li>
+    </ul>
+    <p>We do not sell, rent, or trade your personal data.</p>
+
+    <h3>4. Data Retention</h3>
+    <p>We retain your data for as long as your account is active. You may request deletion of your account and associated data at any time by contacting us.</p>
+
+    <h3>5. Your Rights</h3>
+    <ul>
+      <li>Access and download your personal data.</li>
+      <li>Request correction of inaccurate data.</li>
+      <li>Request deletion of your account.</li>
+      <li>Opt out of marketing emails at any time.</li>
+    </ul>
+
+    <h3>6. Cookies</h3>
+    <p>The App may use cookies or similar technologies to maintain your session and preferences. You can control cookie settings through your device.</p>
+
+    <h3>7. Children's Privacy</h3>
+    <p>BandMaster is not directed at children under 13. We do not knowingly collect personal data from children under 13.</p>
+
+    <h3>8. Security</h3>
+    <p>We use industry-standard security measures to protect your data. However, no method of transmission over the internet is 100% secure.</p>
+
+    <h3>9. Contact</h3>
+    <p>For privacy-related questions: <a href="mailto:privacy@bandmaster.app" style="color: var(--accent);">privacy@bandmaster.app</a></p>
+  </section>
+
+  <!-- REFUND POLICY -->
+  <section class="legal-section" id="refund">
+    <div class="section-tag">Legal</div>
+    <h2>Refund Policy</h2>
+    <div class="updated">Last updated: May 21, 2026</div>
+
+    <div class="highlight-box">
+      <p>We want you to be satisfied with BandMaster. If you are not happy with your purchase, we offer a straightforward refund process.</p>
+    </div>
+
+    <h3>1. Subscription Refunds</h3>
+    <p>We offer a <strong style="color: var(--text);">7-day money-back guarantee</strong> on all new subscription purchases. If you are not satisfied within the first 7 days, contact us for a full refund — no questions asked.</p>
+
+    <h3>2. How to Request a Refund</h3>
+    <ul>
+      <li>Email us at <a href="mailto:support@bandmaster.app" style="color: var(--accent);">support@bandmaster.app</a> within 7 days of purchase.</li>
+      <li>Include your registered email address and order details.</li>
+      <li>Refunds are processed within 5–10 business days to the original payment method.</li>
+    </ul>
+
+    <h3>3. Renewals</h3>
+    <p>If your subscription has automatically renewed and you did not intend to renew it, contact us within <strong style="color: var(--text);">48 hours</strong> of the renewal charge for a refund.</p>
+
+    <h3>4. Non-Refundable Cases</h3>
+    <ul>
+      <li>Refund requests made after the 7-day window (except renewal exceptions above).</li>
+      <li>Accounts found to have violated our Terms of Service.</li>
+      <li>Partial refunds for unused subscription periods beyond the guarantee window.</li>
+    </ul>
+
+    <h3>5. Cancellation</h3>
+    <p>You may cancel your subscription at any time from your account settings. Cancellation stops future charges but does not automatically trigger a refund for the current billing period unless within the 7-day window.</p>
+
+    <h3>6. Contact</h3>
+    <p>Refund questions: <a href="mailto:support@bandmaster.app" style="color: var(--accent);">support@bandmaster.app</a></p>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="section-tag" style="text-align:center;">Get in touch</div>
+    <h2 style="font-family: var(--heading-font); font-size: 1.8rem; margin-bottom: 1rem;">Contact Us</h2>
+    <p>General inquiries: <a href="mailto:support@bandmaster.app">support@bandmaster.app</a></p>
+    <p>Privacy: <a href="mailto:privacy@bandmaster.app">privacy@bandmaster.app</a></p>
+  </section>
+</div>
+
+<footer>
+  © 2026 <span>BandMaster</span>. All rights reserved.
+</footer>
+
+</body>
+</html>
